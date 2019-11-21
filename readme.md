@@ -1,4 +1,4 @@
-<p align="center"><a href="http://kristiansnel.nl"><img src="http://kristiansnel.nl/img/ksnelnl.png" width="400"></a></p>
+<p align="center"><a href="http://kristiansnel.nl"><img src="http://kristiansnel.nl/img/ksnelnl.PNG" width="400"></a></p>
 
 
 ## About Laravel
