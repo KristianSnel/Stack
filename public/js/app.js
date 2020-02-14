@@ -1883,6 +1883,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1899,7 +1943,9 @@ __webpack_require__.r(__webpack_exports__);
       },
       album_id: '',
       pagination: {},
-      edit: false
+      adding: 0,
+      edit: false,
+      admin: true
     };
   },
   created: function created() {
@@ -1917,6 +1963,35 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    setFocus: function setFocus() {
+      // Note, you need to add a ref="search" attribute to your input.
+      this.$refs.stacktitle.focus();
+    },
+    addAlbum: function addAlbum() {
+      var _this2 = this;
+
+      alert("yes");
+
+      if (this.edit === false) {
+        //add
+        //console.log(JSON.stringify(this.album));
+        fetch('api/album', {
+          method: 'post',
+          body: JSON.stringify(this.album),
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          _this2.album.title = '';
+          _this2.album.url = '';
+
+          _this2.fetchAlbums();
+        });
+      } else {//edit
+      }
     }
   }
 });
@@ -1935,7 +2010,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nheader{\r\n\theight: 200px;\r\n\tbackground-color: #5450e3;\n}\nh1 {\r\n\tpadding-top: 50px;\r\n\tcolor: white;\r\n\tfont-family: Helvetica,Arial,sans-serif;\r\n\ttext-align: center;\r\n\tfont-size: 50px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\nheader{\r\n\theight: 200px;\r\n\tbackground-color: #5450e3;\n}\nh1 {\r\n\tpadding-top: 50px;\r\n\tcolor: white;\r\n\tfont-family: Helvetica,Arial,sans-serif;\r\n\ttext-align: center;\r\n\tfont-size: 50px;\n}\n.content {\n}\n.block {\r\n\tmargin-top:20px;\r\n\tbackground-color: #FFF;\r\n\tpadding: 10px;\n}\r\n\r\n\r\n/* Moar css */\r\n\r\n", ""]);
 
 // exports
 
@@ -20189,178 +20264,535 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "content" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("h2", [_vm._v("Filter")]),
+    _c("div", { staticClass: "block" }, [
+      _c("h3", [_vm._v("Administrator rights")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.admin,
+              expression: "admin"
+            }
+          ],
+          staticClass: "btn btn-success",
+          attrs: { id: "adminButton", type: "button" },
+          on: {
+            click: function($event) {
+              _vm.admin = !_vm.admin
+            }
+          }
+        },
+        [_vm._v("Enabled")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.admin,
+              expression: "!admin"
+            }
+          ],
+          staticClass: "btn btn-danger",
+          attrs: { id: "adminButton", type: "button" },
+          on: {
+            click: function($event) {
+              _vm.admin = !_vm.admin
+            }
+          }
+        },
+        [_vm._v(" Disabled")]
+      )
+    ]),
     _vm._v(" "),
-    _c("div", {}, [
-      _c("div", { staticClass: "btn-group" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-outline-secondary",
-            on: {
-              click: function($event) {
-                return _vm.fetchAlbums()
+    _c("div", { staticClass: "block" }, [
+      _c("h2", [_vm._v("Filter")]),
+      _vm._v(" "),
+      _c("div", {}, [
+        _c("div", { staticClass: "btn-group" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-sm btn-outline-secondary",
+              on: {
+                click: function($event) {
+                  return _vm.fetchAlbums()
+                }
               }
-            }
-          },
-          [_vm._v("Reset")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-outline-secondary",
-            on: {
-              click: function($event) {
-                return _vm.fetchAlbums("/api/albums/filter/maarten")
+            },
+            [_vm._v("Reset")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-sm btn-outline-secondary",
+              on: {
+                click: function($event) {
+                  return _vm.fetchAlbums("/api/albums/filter/maarten")
+                }
               }
-            }
-          },
-          [_vm._v("Maarten")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-outline-secondary",
-            on: {
-              click: function($event) {
-                return _vm.fetchAlbums("/api/albums/filter/jacco")
+            },
+            [_vm._v("Maarten")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-sm btn-outline-secondary",
+              on: {
+                click: function($event) {
+                  return _vm.fetchAlbums("/api/albums/filter/jacco")
+                }
               }
-            }
-          },
-          [_vm._v("Jacco")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-outline-secondary",
-            on: {
-              click: function($event) {
-                return _vm.fetchAlbums("/api/albums/filter/Ralph")
+            },
+            [_vm._v("Jacco")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-sm btn-outline-secondary",
+              on: {
+                click: function($event) {
+                  return _vm.fetchAlbums("/api/albums/filter/Ralph")
+                }
               }
-            }
-          },
-          [_vm._v("Ralph")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-outline-secondary",
-            on: {
-              click: function($event) {
-                return _vm.fetchAlbums("/api/albums/filter/Marnix")
+            },
+            [_vm._v("Ralph")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-sm btn-outline-secondary",
+              on: {
+                click: function($event) {
+                  return _vm.fetchAlbums("/api/albums/filter/Marnix")
+                }
               }
-            }
-          },
-          [_vm._v("Marnix")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-outline-secondary",
-            on: {
-              click: function($event) {
-                return _vm.fetchAlbums("/api/albums/filter/Kris")
+            },
+            [_vm._v("Marnix")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-sm btn-outline-secondary",
+              on: {
+                click: function($event) {
+                  return _vm.fetchAlbums("/api/albums/filter/Kris")
+                }
               }
-            }
-          },
-          [_vm._v("Kris")]
-        )
+            },
+            [_vm._v("Kris")]
+          )
+        ])
       ])
     ]),
     _vm._v(" "),
-    _c("h2", [_vm._v("Albums")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c(
-        "div",
-        { staticClass: "row col-md-12" },
-        _vm._l(_vm.albums, function(album) {
-          return _c("div", { key: album.id, staticClass: "col-md-4" }, [
-            _c("div", { staticClass: "card mb-4 shadow-sm" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "bd-placeholder-img card-img-top",
-                  attrs: {
-                    width: "100%",
-                    height: "225",
-                    xmlns: "http://www.w3.org/2000/svg",
-                    preserveAspectRatio: "xMidYMid slice",
-                    focusable: "false",
-                    role: "img",
-                    "aria-label": "Placeholder: Thumbnail"
-                  }
-                },
-                [
-                  _c("title", [_vm._v("Placeholder")]),
-                  _vm._v(" "),
-                  _c("rect", {
-                    attrs: { width: "100%", height: "100%", fill: "#5450e3" }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "text",
-                    {
-                      attrs: { x: "50%", y: "50%", fill: "#eceeef", dy: ".3em" }
-                    },
-                    [_vm._v("Thumbnail")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("title", [_vm._v("Placeholder")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(album.title))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "d-flex justify-content-between align-items-center"
-                  },
-                  [
-                    _c("div", { staticClass: "btn-group" }, [
+    _c("div", { staticClass: "block" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h2", [_vm._v("Albums")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row col-md-12" },
+          [
+            !_vm.albums || !_vm.albums.length
+              ? _c("div", [_c("h3", [_vm._v("Nothing to see here!")])])
+              : _vm._l(_vm.albums, function(album) {
+                  return _c("div", { key: album.id, staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "card mb-4 shadow-sm" }, [
                       _c(
-                        "a",
+                        "svg",
                         {
-                          staticClass: "btn btn-sm btn-outline-secondary",
-                          attrs: { href: album.url, target: "_blank" }
+                          staticClass: "bd-placeholder-img card-img-top",
+                          attrs: {
+                            width: "100%",
+                            height: "225",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            preserveAspectRatio: "xMidYMid slice",
+                            focusable: "false",
+                            role: "img",
+                            "aria-label": "Placeholder: Thumbnail"
+                          }
                         },
-                        [_vm._v("View")]
+                        [
+                          _c("title", [_vm._v("Placeholder")]),
+                          _vm._v(" "),
+                          _c("rect", {
+                            attrs: {
+                              width: "100%",
+                              height: "100%",
+                              fill: "#5450e3"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "text",
+                            {
+                              attrs: {
+                                x: "50%",
+                                y: "50%",
+                                fill: "#eceeef",
+                                dy: ".3em"
+                              }
+                            },
+                            [_vm._v("Thumbnail")]
+                          )
+                        ]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-sm btn-outline-secondary",
-                          attrs: { type: "button" }
-                        },
-                        [_vm._v("Details")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(album.date))
+                      _c("title", [_vm._v("Placeholder")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(album.title))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "d-flex justify-content-between align-items-center"
+                          },
+                          [
+                            _c("div", { staticClass: "btn-group" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-sm btn-outline-secondary",
+                                  attrs: { href: album.url, target: "_blank" }
+                                },
+                                [_vm._v("View")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.admin,
+                                      expression: "admin"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "btn btn-sm btn-outline-secondary",
+                                  attrs: { type: "button" }
+                                },
+                                [_vm._v("Edit")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "btn btn-sm btn-outline-secondary",
+                                  attrs: { type: "button" }
+                                },
+                                [_vm._v("Details")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("small", { staticClass: "text-muted" }, [
+                              _vm._v(_vm._s(album.date))
+                            ])
+                          ]
+                        )
+                      ])
                     ])
-                  ]
-                )
-              ])
-            ])
-          ])
-        }),
-        0
-      )
+                  ])
+                }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.admin,
+                    expression: "admin"
+                  }
+                ],
+                staticClass: "col-md-4"
+              },
+              [
+                _c("div", { staticClass: "card mb-4 shadow-sm" }, [
+                  _c(
+                    "svg",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.adding,
+                          expression: "!adding"
+                        }
+                      ],
+                      staticClass: "bd-placeholder-img card-img-top",
+                      attrs: {
+                        width: "100%",
+                        height: "225",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        preserveAspectRatio: "xMidYMid slice",
+                        focusable: "false",
+                        role: "img",
+                        "aria-label": "Placeholder: Thumbnail"
+                      }
+                    },
+                    [
+                      _c("title", [_vm._v("Placeholder")]),
+                      _vm._v(" "),
+                      _c("rect", {
+                        attrs: {
+                          width: "100%",
+                          height: "100%",
+                          fill: "#5450e3"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "text",
+                        {
+                          attrs: {
+                            x: "50%",
+                            y: "50%",
+                            fill: "#eceeef",
+                            dy: ".3em"
+                          }
+                        },
+                        [_vm._v("+")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.adding,
+                          expression: "adding"
+                        }
+                      ],
+                      staticClass: "bd-placeholder-img card-img-top",
+                      attrs: { width: "100%", height: "100" }
+                    },
+                    [
+                      _c("rect", {
+                        attrs: {
+                          width: "100%",
+                          height: "100%",
+                          fill: "#5450e3"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("title", [_vm._v("Placeholder")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.adding,
+                            expression: "!adding"
+                          }
+                        ],
+                        staticClass: "card-text"
+                      },
+                      [_vm._v("Add new album")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.adding,
+                            expression: "!adding"
+                          }
+                        ],
+                        staticClass: "btn-group"
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-outline-secondary",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.adding = !_vm.adding
+                                _vm.setFocus()
+                              }
+                            }
+                          },
+                          [_vm._v("Add")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.adding,
+                            expression: "adding"
+                          }
+                        ],
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.addAlbum($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-form-label",
+                              attrs: { for: "inputstacktitle" }
+                            },
+                            [_vm._v("Stack title")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.album.title,
+                                expression: "album.title"
+                              }
+                            ],
+                            ref: "stacktitle",
+                            staticClass: "form-control",
+                            attrs: { id: "inputstacktitle" },
+                            domProps: { value: _vm.album.title },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.album,
+                                  "title",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-form-label",
+                              attrs: { for: "inputstacklink" }
+                            },
+                            [_vm._v("Stack url")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.album.url,
+                                expression: "album.url"
+                              },
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.adding,
+                                expression: "adding"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "inputstacklink" },
+                            domProps: { value: _vm.album.url },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                _vm.adding = !_vm.adding
+                                _vm.addAlbum()
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.album, "url", $event.target.value)
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  _vm.adding = !_vm.adding
+                                }
+                              }
+                            },
+                            [_vm._v("Submit")]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ],
+          2
+        )
+      ])
     ])
   ])
 }

@@ -24,7 +24,7 @@ Route::get('albums/filter/{filter}', 'AlbumController@filter');
 
 Route::get('albums/{id}', 'AlbumController@show');
 
-Route::post('albums', 'AlbumController@store');
+Route::post('album', 'AlbumController@store');
 
 Route::put('albums/{id}', 'AlbumController@store');
 

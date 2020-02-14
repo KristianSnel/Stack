@@ -50,7 +50,17 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->input('title');
+        $album = $request->isMethod('put') ? Album::findOrFail
+        ($request->id) : new Album;
+
+        $album->title = $request->input('title');
+        $album->url = $request->input('url');
+
+        if($album->save()) {
+            return new AlbumResource($album);
+        }
+
     }
 
     /**

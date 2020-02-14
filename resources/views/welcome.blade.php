@@ -28,3 +28,15 @@
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
+
+
+<style>
+body {
+  background-color: #ededf0;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+</style>
