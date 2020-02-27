@@ -17,7 +17,10 @@
     </head>
     <body>
         <div id="app">
-            <div class="container">
+            <div class="navbar_container">
+                <navbar></navbar>
+            </div>
+            <div class="container content_container">
                 <albums></albums>
             </div>
         </div>
@@ -30,13 +33,23 @@
 </html>
 
 
-<style>
-body {
-  background-color: #ededf0;
-  -ms-overflow-style: none;
-}
 
-body::-webkit-scrollbar {
-  display: none;
-}
+<style>
+    body {
+      background-color: #ededf0;
+      -ms-overflow-style: none;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .navbar_container {
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .content_container {
+        max-width: 1200px;
+    }
 </style>

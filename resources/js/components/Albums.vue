@@ -3,25 +3,14 @@
 		<header>
 			<h1>STACK Media Database</h1>
 		</header>
+
 		<div class="block">
 			<h3>Administrator rights</h3>
 			<button v-show="admin" id="adminButton" type="button" class="btn btn-success" @click="admin = !admin;">Enabled</button>
 			<button v-show="!admin" id="adminButton" type="button" class="btn btn-danger" @click="admin = !admin;"> Disabled</button>
 		</div>
-		<div class="block">
-			<h2>Filter</h2>
-			<div class="">
-				<div class="btn-group">
-	              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums()">Reset</a>
-	              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/maarten')">Maarten</a>
-	              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/jacco')">Jacco</a>
-	              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/Ralph')">Ralph</a>
-	              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/Marnix')">Marnix</a>
-	              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/Kris')">Kris</a>
-	            </div>
-			</div>
-		</div>
-		<div class="block">
+
+		<div class="block pull-left">
 			<div class="container">
 				<h2>Albums</h2>
 				<div class="row col-md-12">
@@ -84,6 +73,18 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="sidebar block"><h2>Filter</h2>
+			<div class="btn-group-vertical">
+              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums()">Reset</a>
+              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/maarten')">Maarten</a>
+              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/jacco')">Jacco</a>
+              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/Ralph')">Ralph</a>
+              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/Marnix')">Marnix</a>
+              <a class="btn btn-sm btn-outline-secondary" @click="fetchAlbums('/api/albums/filter/Kris')">Kris</a>
+			</div>
+		</div>
+
 	</div>
 </template>
 
@@ -162,12 +163,11 @@
 
 <style>
 header{
-	height: 200px;
+	padding: 20px;
 	background-color: #5450e3;
 }
 
 h1 {
-	padding-top: 50px;
 	color: white;
 	font-family: Helvetica,Arial,sans-serif;
 	text-align: center;
@@ -179,7 +179,7 @@ h1 {
 }
 
 .block {
-	margin-top:20px;
+	margin-top: 10px;
 	background-color: #FFF;
 	padding: 10px;
 }
